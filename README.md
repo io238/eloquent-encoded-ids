@@ -1,10 +1,10 @@
-# Automatic route key encryption for Laravel Eloquent using Hashids (short, unique, non-sequential ids) with prefix support
+# Eloquent Encoded IDs
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/io238/eloquent-encoded-ids.svg?label=Version)](https://packagist.org/packages/io238/eloquent-encoded-ids)
 [![GitHub Tests Action Status](https://github.com/io238/eloquent-encoded-ids/workflows/Tests/badge.svg?branch=master)](https://github.com/io238/eloquent-encoded-ids/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/io238/eloquent-encoded-ids.svg?label=Downloads)](https://packagist.org/packages/io238/eloquent-encoded-ids)
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Automatic route key encryption for Laravel Eloquent using Hashids (short, unique, non-sequential ids) with prefix support
 
 ## Installation
 
