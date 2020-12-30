@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Io238\EloquentEncodedIds\Tests;
 
 class ExampleTest extends TestCase
 {

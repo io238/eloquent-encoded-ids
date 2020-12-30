@@ -1,22 +1,23 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "io238/eloquent-encoded-ids",
+    "description": "Automatic route key encryption for Laravel Eloquent using Hashids (short, unique, non-sequential ids) with prefix support",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "io238",
+        "eloquent-encoded-ids"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/io238/eloquent-encoded-ids",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Martin Migge",
+            "email": "martin@io238.eu",
             "homepage": "https://io238.eu",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^7.4|^8.0",
+        "hashids/hashids": "^4.1",
         "illuminate/contracts": "^8.0"
     },
     "require-dev": {
@@ -25,13 +26,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Io238\\EloquentEncodedIds\\": "src",
+            "Io238\\EloquentEncodedIds\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Io238\\EloquentEncodedIds\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -45,10 +46,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "Io238\\EloquentEncodedIds\\EloquentEncodedIdsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "EloquentEncodedIds": "Io238\\EloquentEncodedIds\\EloquentEncodedIdsFacade"
             }
         }
     },

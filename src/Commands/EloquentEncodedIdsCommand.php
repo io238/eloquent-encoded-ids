@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace Io238\EloquentEncodedIds\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class EloquentEncodedIdsCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'eloquent-encoded-ids';
 
     public $description = 'My command';
 
