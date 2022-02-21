@@ -3,7 +3,11 @@
     "description": "Automatic route key encryption for Laravel Eloquent using Hashids (short, unique, non-sequential ids) with prefix support",
     "keywords": [
         "io238",
-        "eloquent-encoded-ids"
+        "Eloquent",
+        "ORM",
+        "Hashids",
+        "ID",
+        "Encryption"
     ],
     "homepage": "https://github.com/io238/eloquent-encoded-ids",
     "license": "MIT",
@@ -18,7 +22,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "hashids/hashids": "^4.1",
-        "illuminate/contracts": "^8.0"
+        "illuminate/contracts": "^8.0|^9.0"
     },
     "require-dev": {
         "orchestra/testbench": "^6.0",
@@ -26,8 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Io238\\EloquentEncodedIds\\": "src",
-            "Io238\\EloquentEncodedIds\\Database\\Factories\\": "database/factories"
+            "Io238\\EloquentEncodedIds\\": "src"
         }
     },
     "autoload-dev": {
