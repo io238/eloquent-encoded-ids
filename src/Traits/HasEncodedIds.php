@@ -13,7 +13,6 @@ trait HasEncodedIds {
     {
         $key = $this->getKey();
 
-        // If ID does not existing (yet), do not attempt to encode it
         if ( ! $this->getKey()) {
             return $this->getKey();
         }
