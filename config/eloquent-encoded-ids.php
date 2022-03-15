@@ -2,16 +2,20 @@
 
 return [
 
-    // minimum lenght of encoded ID (excl. prefix)
-    'length' => 5,
+    // Minimum length of encoded IDs
+    'length'    => 5,
 
-    // alphabet to be used to generate encoded ID
-    'alphabet' => '123456789abcdefghikmnpqrstuvwxyz',
+    // Alphabet to be used to generate encoded IDs
+    'alphabet'  => '123456789abcdefghikmnpqrstuvwxyz',
 
-    // encryption salt
-    'salt' => '',
+    // Encryption salt
+    // Warning: changing the salt, will produce different IDs
+    'salt'      => env('APP_KEY'),
 
-    // Prefix separator
-    'separator' => '-',
+    // Use a prefix to the encoded ID, to be able to recognize the model that the ID belongs to
+    'prefix'    => true,
+
+    // Character used to separate the prefix from the encoded ID
+    'separator' => '_',
 
 ];

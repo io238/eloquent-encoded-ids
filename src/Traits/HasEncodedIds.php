@@ -4,6 +4,7 @@ namespace Io238\EloquentEncodedIds\Traits;
 
 use Exception;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 use RuntimeException;
 
 
@@ -11,23 +12,34 @@ trait HasEncodedIds {
 
     public function getRouteKey()
     {
-        $key = $this->getKey();
-
-        if ( ! $this->getKey()) {
+        if ( ! $this->getKey() || $this->getKeyType() !== 'int') {
             return $this->getKey();
         }
 
-        if ($this->getKeyType() === 'int' && (ctype_digit($key) || is_int($key))) {
-            $encodedId = App::make('hashids')->encode($key);
-            if (property_exists($this, 'idPrefix')) {
-                return implode(config('eloquent-encoded-ids.separator'), [static::$idPrefix, $encodedId]);
-            }
-            else return $encodedId;
-        }
-        else {
-            throw new RuntimeException('Key should be of type int to encode it.');
+        if ( ! ctype_digit((string) $this->getKey())) {
+            throw new RuntimeException('Key should be of type integer to encode it.');
         }
 
+        $encodedId = App::make('hashids')->encode($this->getKey());
+
+        return join(
+            config('eloquent-encoded-ids.separator'),
+            array_filter([
+                static::getRouteKeyPrefix(),
+                $encodedId,
+            ])
+        );
+    }
+
+
+    static public function getRouteKeyPrefix(): string|null
+    {
+        return (new static)->prefix ??
+            Str::of(get_class())->afterLast('\\')
+                ->kebab()
+                ->explode('-')
+                ->map(fn($str) => $str[0])
+                ->join('');
     }
 
 
@@ -40,9 +52,12 @@ trait HasEncodedIds {
     public function resolveRouteBinding($value, $field = null)
     {
         try {
-            $value = collect(explode(config('eloquent-encoded-ids.separator'), $value))->last();
+
+            $value = Str::of($value)->explode(config('eloquent-encoded-ids.separator'))->last();
+
             $decodedId = collect(App::make('hashids')->decode($value))->first();
-        } catch (Exception $e) {
+
+        } catch (Exception) {
             return null;
         }
 
