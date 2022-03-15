@@ -9,9 +9,11 @@ beforeEach(function () {
     $this->otherTestModel = OtherTestModel::create(['name' => 'Test']);
 });
 
-it('persists the test model in the DB', function () {
+it('persists the test models in the DB', function () {
 
     expect($this->testModel->getKey())->toBe(1);
+
+    expect($this->otherTestModel->getKey())->toBe(1);
 
 });
 
