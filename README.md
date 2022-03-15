@@ -29,7 +29,6 @@ route('users.show', User::find(3)) // http://app.test/user/dvd6v
 
 This is useful to hide sensitive app information (e.g. total number of users, invoices, etc).
 
-
 ## Installation
 
 You can install the package via composer:
@@ -40,7 +39,7 @@ composer require io238/eloquent-encoded-ids
 
 ## Usage
 
-In order to encode the ID of a Laravel model, simply add the `HasEncodedIds` trait to the model: 
+In order to encode the ID of a Laravel model, simply add the `HasEncodedIds` trait to the model:
 
 ```php
 namespace App\Models;
@@ -56,10 +55,22 @@ class User extends Model {
 }
 ```
 
+Internally, Laravel will still use the numeric ID within controllers and also stores them as numeric IDs in the
+database:
+
+```php
+class UserController extends Controller {
+
+    public function show(User $user)
+    {
+        return $user->id; // 1
+    }
+}
+```
+
 ### Prefixes
 
 By default this package adds a prefix to the encoded ID, which helps to identify what type of ID has been encoded.
-
 
 **Example:** The `User` model has encoded IDs starting with `u_`, such as `u_m8y78`.
 
