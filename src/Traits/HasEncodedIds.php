@@ -3,7 +3,6 @@
 namespace Io238\EloquentEncodedIds\Traits;
 
 use Exception;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -20,7 +19,7 @@ trait HasEncodedIds {
             throw new RuntimeException('Key should be of type integer to encode it.');
         }
 
-        $encodedId = App::make('hashids')->encode($this->getKey());
+        $encodedId = app('hashids', ['class' => get_class()])->encode($this->getKey());
 
         return join(
             config('eloquent-encoded-ids.separator'),
@@ -55,7 +54,7 @@ trait HasEncodedIds {
 
             $value = Str::of($value)->explode(config('eloquent-encoded-ids.separator'))->last();
 
-            $decodedId = collect(App::make('hashids')->decode($value))->first();
+            $decodedId = collect(app('hashids', ['class' => get_class()])->decode($value))->first();
 
         } catch (Exception) {
             return null;
