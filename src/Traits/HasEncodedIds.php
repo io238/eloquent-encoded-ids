@@ -24,7 +24,7 @@ trait HasEncodedIds {
         return join(
             config('eloquent-encoded-ids.separator'),
             array_filter([
-                static::getRouteKeyPrefix(),
+                config('eloquent-encoded-ids.prefix') ? static::getRouteKeyPrefix() : null,
                 $encodedId,
             ])
         );
