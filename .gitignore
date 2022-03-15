@@ -2,10 +2,10 @@
 .php_cs
 .php_cs.cache
 .phpunit.result.cache
+phpunit.xml
 build
 composer.lock
 coverage
 docs
-phpunit.xml
 psalm.xml
 vendor

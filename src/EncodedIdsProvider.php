@@ -7,7 +7,7 @@ use Illuminate\Support\Fluent;
 use Illuminate\Support\ServiceProvider;
 
 
-class EloquentEncodedIdsServiceProvider extends ServiceProvider {
+class EncodedIdsProvider extends ServiceProvider {
 
     public function boot()
     {

@@ -22,11 +22,12 @@
     "require": {
         "php": "^7.4|^8.0",
         "hashids/hashids": "^4.1",
-        "illuminate/contracts": "^8.0|^9.0"
+        "illuminate/database": "^8.0|^9.0",
+        "illuminate/support": "^8.0|^9.0"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
-        "phpunit/phpunit": "^9.3"
+        "orchestra/testbench": "^6.23|^7.0",
+        "pestphp/pest": "^1.21"
     },
     "autoload": {
         "psr-4": {
@@ -39,9 +40,8 @@
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit --colors=always",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "test": "vendor/bin/pest",
+        "format": "vendor/bin/psalm"
     },
     "config": {
         "sort-packages": true
@@ -49,11 +49,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Io238\\EloquentEncodedIds\\EloquentEncodedIdsServiceProvider"
-            ],
-            "aliases": {
-                "EloquentEncodedIds": "Io238\\EloquentEncodedIds\\EloquentEncodedIdsFacade"
-            }
+                "Io238\\EloquentEncodedIds\\EncodedIdsProvider"
+            ]
         }
     },
     "minimum-stability": "dev",
