@@ -6,10 +6,11 @@ return [
     'length'    => 5,
 
     // Alphabet to be used to generate encoded IDs
+    // By default this list excludes ambiguous characters
     'alphabet'  => '123456789abcdefghikmnpqrstuvwxyz',
 
     // Encryption salt
-    // Warning: changing the salt, will produce different IDs
+    // Warning: changing the salt, will produce different encoded IDs
     'salt'      => env('APP_KEY'),
 
     // Use a prefix to the encoded ID, to be able to recognize the model that the ID belongs to

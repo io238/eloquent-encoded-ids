@@ -22,9 +22,9 @@ trait HasEncodedIds {
         $encodedId = app('hashids', ['class' => get_class()])->encode($this->getKey());
 
         return join(
-            config('eloquent-encoded-ids.separator'),
+            config('encoded-ids.separator', '_'),
             array_filter([
-                config('eloquent-encoded-ids.prefix') ? static::getRouteKeyPrefix() : null,
+                config('encoded-ids.prefix') ? static::getRouteKeyPrefix() : null,
                 $encodedId,
             ])
         );
@@ -52,7 +52,7 @@ trait HasEncodedIds {
     {
         try {
 
-            $value = Str::of($value)->explode(config('eloquent-encoded-ids.separator'))->last();
+            $value = Str::of($value)->explode(config('encoded-ids.separator', '_'))->last();
 
             $decodedId = collect(app('hashids', ['class' => get_class()])->decode($value))->first();
 
