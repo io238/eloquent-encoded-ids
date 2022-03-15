@@ -29,11 +29,9 @@ class EncodedIdsProvider extends ServiceProvider {
             // Adding the class name ensures that different models do not share the same encryption salt
             $salt = md5(config('encoded-ids.salt') . (new Fluent($parameters))->class);
 
-            return new Hashids(
-                $salt,
-                config('encoded-ids.length'),
-                config('encoded-ids.alphabet')
-            );
+            $alphabet = config('encoded-ids.case-insensitive') ? strtolower(config('encoded-ids.alphabet')) : config('encoded-ids.alphabet');
+
+            return new Hashids($salt, config('encoded-ids.length'), $alphabet);
         });
 
         $this->app->alias(Hashids::class, 'hashids');

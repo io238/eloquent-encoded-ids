@@ -42,6 +42,11 @@ class TestCase extends Orchestra {
             $table->id();
             $table->text('name')->nullable();
         });
+
+        Schema::create('other_test_models', function (Blueprint $table) {
+            $table->id();
+            $table->text('name')->nullable();
+        });
     }
 
 }

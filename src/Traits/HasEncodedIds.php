@@ -52,6 +52,10 @@ trait HasEncodedIds {
     {
         try {
 
+            if (config('encoded-ids.case-insensitive')) {
+                $value = Str::of($value)->lower();
+            }
+
             $value = Str::of($value)->explode(config('encoded-ids.separator', '_'))->last();
 
             $decodedId = collect(app('hashids', ['class' => get_class()])->decode($value))->first();
