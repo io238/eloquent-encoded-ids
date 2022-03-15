@@ -4,7 +4,8 @@
 [![GitHub Tests Action Status](https://github.com/io238/eloquent-encoded-ids/workflows/Tests/badge.svg?branch=master)](https://github.com/io238/eloquent-encoded-ids/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/io238/eloquent-encoded-ids.svg?label=Downloads)](https://packagist.org/packages/io238/eloquent-encoded-ids)
 
-Automatic route key encryption for Laravel Eloquent using [Hashids](https://hashids.org/) (short, unique, non-sequential IDs) with prefix support
+Automatic route key encryption for Laravel Eloquent using [Hashids](https://hashids.org/) (short, unique, non-sequential
+IDs) with prefix support
 
 ## Installation
 
@@ -38,10 +39,6 @@ return [
 ```bash
 composer test
 ```
-
-## Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
 
