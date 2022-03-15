@@ -4,7 +4,7 @@
 [![GitHub Tests Action Status](https://github.com/io238/eloquent-encoded-ids/workflows/Tests/badge.svg?branch=master)](https://github.com/io238/eloquent-encoded-ids/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/io238/eloquent-encoded-ids.svg?label=Downloads)](https://packagist.org/packages/io238/eloquent-encoded-ids)
 
-Automatic route key encryption for Laravel Eloquent using Hashids (short, unique, non-sequential ids) with prefix support
+Automatic route key encryption for Laravel Eloquent using [Hashids](https://hashids.org/) (short, unique, non-sequential IDs) with prefix support
 
 ## Installation
 
@@ -12,13 +12,6 @@ You can install the package via composer:
 
 ```bash
 composer require io238/eloquent-encoded-ids
-```
-
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Io238\EloquentEncodedIds\EloquentEncodedIdsServiceProvider" --tag="migrations"
-php artisan migrate
 ```
 
 You can publish the config file with:
@@ -37,9 +30,7 @@ return [
 ## Usage
 
 ```php
-$eloquent-encoded-ids = new Io238\EloquentEncodedIds();
-
-echo $eloquent-encoded-ids->echoPhrase('Hello World!');
+//
 ```
 
 ## Testing
