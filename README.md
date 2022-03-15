@@ -45,6 +45,8 @@ In order to encode the ID of a Laravel model, simply add the `HasEncodedIds` tra
 ```php
 namespace App\Models;
 
+use Io238\EloquentEncodedIds\Traits\HasEncodedIds;
+
 class User extends Model {
 
     use HasEncodedIds;
@@ -64,8 +66,6 @@ By default this package adds a prefix to the encoded ID, which helps to identify
 It uses the model name's first letter, or you can explicitly provide a prefix as a protected property of the model:
 
 ```php
-namespace App\Models;
-
 class User extends Model {
 
     use HasEncodedIds;
