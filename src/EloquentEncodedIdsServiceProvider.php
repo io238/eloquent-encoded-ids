@@ -14,10 +14,6 @@ class EloquentEncodedIdsServiceProvider extends ServiceProvider {
             $this->publishes([
                 __DIR__ . '/../config/eloquent-encoded-ids.php' => config_path('eloquent-encoded-ids.php'),
             ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/../resources/views' => base_path('resources/views/vendor/eloquent-encoded-ids'),
-            ], 'views');
         }
     }
 
