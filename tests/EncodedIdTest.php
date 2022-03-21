@@ -82,3 +82,9 @@ it('honors the case of the encoding alphabet', function () {
     expect(TestModel::first()->resolveRouteBinding('M7VX7'))->toBeNull();
 
 });
+
+it('returns null, if the model is not found', function () {
+
+    expect(TestModel::first()->resolveRouteBinding('invalid-encoded-id'))->toBeNull();
+
+});

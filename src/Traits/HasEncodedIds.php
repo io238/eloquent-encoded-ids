@@ -2,7 +2,6 @@
 
 namespace Io238\EloquentEncodedIds\Traits;
 
-use Exception;
 use Illuminate\Support\Str;
 use RuntimeException;
 
@@ -50,20 +49,17 @@ trait HasEncodedIds {
 
     public function resolveRouteBinding($value, $field = null)
     {
-        try {
-
-            if (config('encoded-ids.case-insensitive')) {
-                $value = Str::of($value)->lower();
-            }
-
-            $value = Str::of($value)->explode(config('encoded-ids.separator', '_'))->last();
-
-            $decodedId = collect(app('hashids', ['class' => get_class()])->decode($value))->first();
-
-        } catch (Exception) {
-            return null;
+        if (config('encoded-ids.case-insensitive')) {
+            $value = strtolower($value);
         }
 
+        // Ignore prefix, if any
+        $value = Str::of($value)->explode(config('encoded-ids.separator', '_'))->last();
+
+        // Convert encoded (Hashid) to numeric ID (integer)
+        $decodedId = rescue(fn() => app('hashids', ['class' => get_class()])->decode($value)[0]);
+
+        // Resolve the model
         return $this->where($field ?? $this->getRouteKeyName(), $decodedId)->first();
     }
 
