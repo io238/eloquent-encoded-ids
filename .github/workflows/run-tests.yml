@@ -1,57 +1,44 @@
-name: Tests
+name: Cross-Platform Package Tests
 
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
-        php: [7.4, 8.0, 8.1, 8.2, 8.3]
-        laravel: [8.*, 9.*, 10.*, 11.*]
+        php: [7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
+        laravel: [8, 9, 10, 11]
         stability: [prefer-lowest, prefer-stable]
-        include:
-          # Laravel 8 requires PHP >=7.4
-          - php: 7.4
-            laravel: 8.*
-            testbench: 6.*
-          # Laravel 9 requires PHP >=8.0
-          - php: 8.0
-            laravel: 9.*
-            testbench: 7.*
-          # Laravel 10 requires PHP >=8.1
-          - php: 8.1
-            laravel: 10.*
-            testbench: 8.*
-          # Laravel 11 requires PHP >=8.2
-          - php: 8.2
-            laravel: 11.*
-            testbench: 9.*
-
-    name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Check PHP/Laravel compatibility
+        if: |
+          (matrix.laravel == 8 && matrix.php not in ['7.4', '8.0', '8.1']) ||
+          (matrix.laravel == 9 && matrix.php not in ['8.0', '8.1', '8.2']) ||
+          (matrix.laravel == 10 && matrix.php not in ['8.1', '8.2', '8.3']) ||
+          (matrix.laravel == 11 && matrix.php not in ['8.2', '8.3', '8.4'])
+        run: exit 0  # Skip incompatible versions
 
-      - name: Setup PHP
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php }}
-          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick, fileinfo
+          extensions: mbstring, json, xml
           coverage: none
 
-      - name: Setup problem matchers
-        run: |
-          echo "::add-matcher::${{ runner.tool_cache }}/php.json"
-          echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+      - name: Check out code
+        uses: actions/checkout@v4
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require --no-update laravel/framework:${{ matrix.laravel }}.*
+          composer require --no-update orchestra/testbench:${{ matrix.laravel - 2 }}.*
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
-      - name: Execute tests
+      - name: Run tests with Pest
         run: vendor/bin/pest
