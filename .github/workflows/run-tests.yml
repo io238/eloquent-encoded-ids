@@ -14,16 +14,25 @@ jobs:
         php: [7.4, 8.0, 8.1, 8.2, 8.3, 8.4]
         laravel: [8, 9, 10, 11]
         stability: [prefer-lowest, prefer-stable]
+        testbench: [6, 7, 8, 9]
+        include:
+          - laravel: 8
+            php: [7.4, 8.0, 8.1]
+            testbench: 6
+
+          - laravel: 9
+            php: [8.0, 8.1, 8.2]
+            testbench: 7
+
+          - laravel: 10
+            php: [8.1, 8.2, 8.3]
+            testbench: 8
+
+          - laravel: 11
+            php: [8.2, 8.3, 8.4]
+            testbench: 9
 
     steps:
-      - name: Check PHP/Laravel compatibility
-        if: |
-          (matrix.laravel == 8 && matrix.php not in ['7.4', '8.0', '8.1']) ||
-          (matrix.laravel == 9 && matrix.php not in ['8.0', '8.1', '8.2']) ||
-          (matrix.laravel == 10 && matrix.php not in ['8.1', '8.2', '8.3']) ||
-          (matrix.laravel == 11 && matrix.php not in ['8.2', '8.3', '8.4'])
-        run: exit 0  # Skip incompatible versions
-
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -37,7 +46,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer require --no-update laravel/framework:${{ matrix.laravel }}.*
-          composer require --no-update orchestra/testbench:${{ matrix.laravel - 2 }}.*
+          composer require --no-update orchestra/testbench:${{ matrix.testbench }}.*
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Run tests with Pest
